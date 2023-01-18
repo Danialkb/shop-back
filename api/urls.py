@@ -8,9 +8,9 @@ from . import views
 
 # urlpatterns = router.urls
 urlpatterns = [
-    path('products/', views.get_products),
-    path('categories/', views.get_categories),
-    path('products/<int:pk>/', views.get_product),
-    path('categories/<int:pk>/', views.get_category),
-    # path('categories/<int:pk>/products', views.get_products_by_category),
+    path(r'products/', views.get_products),
+    path(r'categories/', views.get_categories),
+    path(r'products/<int:pk>/', views.get_product),
+    path(r'categories/<int:pk>/', views.get_category),
+    path(r'categories/<int:pk>/products', views.get_products_by_category),
 ]

@@ -11,36 +11,38 @@ from . import models, serializers
 def get_products(request, *args, **kwargs):
     products = models.Product.objects.all()
     serializer = serializers.ProductSerializer(products, many=True).data
-    return JsonResponse(serializer, safe=False)
+    return Response(serializer)
 
 
 @api_view(['GET'])
 def get_categories(request, *args, **kwargs):
     categories = models.Category.objects.all()
     serializer = serializers.CategorySerializer(categories, many=True).data
-    return JsonResponse(serializer, safe=False)
+    return Response(serializer)
 
 
 @api_view(['GET'])
-def get_product(request, pk, *args, **kwargs):
+def get_product(request, *args, **kwargs):
     # products = models.Product.objects.get(id=pk)
-    product = get_object_or_404(models.Product, id=pk)
+    product = get_object_or_404(models.Product, **kwargs)
     serializer = serializers.ProductSerializer(product).data
 
-    return JsonResponse(serializer, safe=False)
+    return Response(serializer)
 
 
-def get_category(request, pk, *args, **kwargs):
-    category = get_object_or_404(models.Category, id=pk)
+@api_view(['GET'])
+def get_category(request, *args, **kwargs):
+    category = get_object_or_404(models.Category, **kwargs)
     serializer = serializers.CategorySerializer(category).data
-    return JsonResponse(serializer, safe=False)
+    return Response(serializer)
 
 
-def get_products_by_category(request, pk, *args, **kwargs):
-    category = get_object_or_404(models.Category, id=pk)
+@api_view(['GET'])
+def get_products_by_category(request, *args, **kwargs):
+    category = models.Category.objects.get(**kwargs)
     products = category.products.all()
     serializer = serializers.ProductSerializer(products, many=True).data
-    return JsonResponse(serializer, safe=False)
+    return Response(serializer)
 
 
 # class ProductViewSet(ModelViewSet):
