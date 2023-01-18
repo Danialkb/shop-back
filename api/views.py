@@ -42,6 +42,7 @@ def get_products_by_category(request, pk, *args, **kwargs):
     serializer = serializers.ProductSerializer(products, many=True).data
     return JsonResponse(serializer, safe=False)
 
+
 # class ProductViewSet(ModelViewSet):
 #     queryset = models.Product.objects.all()
 #     serializer_class = serializers.ProductSerializer
